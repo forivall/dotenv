@@ -10,7 +10,7 @@ const dotenv = require('../lib/main')
 process.env.TEST = 'test'
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(17)
+t.plan(18)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -29,6 +29,8 @@ t.equal(parsed.EXPAND_NEWLINES, 'expand\nnewlines', 'expands newlines but only i
 t.equal(parsed.DONT_EXPAND_NEWLINES_1, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
 
 t.equal(parsed.DONT_EXPAND_NEWLINES_2, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
+
+t.equal(parsed.KEEP_NEWLINES, 'keep\nnewlines', 'keeps newlines if single quoted')
 
 t.notOk(parsed.COMMENTS, 'ignores commented lines')
 
